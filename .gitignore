@@ -6,3 +6,10 @@ Codit.Blog.Cache/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 Codit.Blog.Cache/bin/Debug/Newtonsoft.Json.xml
 *.user
 Codit.Blog.Cache/bin/Debug/StackExchange.Redis.StrongName.xml
+*.suo
+Codit.Blog.Cache.Extension/bin/Debug/Newtonsoft.Json.xml
+*.xml
+Codit.Blog.Cache.Extension/obj/Debug/Codit.Blog.Cache.Extension.csproj.FileListAbsolute.txt
+*.cache
+Codit.Blog.Cache.Extension/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+Codit.Blog.Cache.Extension/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
