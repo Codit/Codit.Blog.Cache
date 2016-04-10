@@ -114,9 +114,6 @@ namespace Codit.Blog.Cache.Extension
                 {
                     // We need to copy the message in order to read it. 
                     // This means the original message will have the 'Read' state, which means it can no longer be read.
-                    // As such, we create 2 copies of the original:
-                    // - #1 for passing along the wcf pipeline
-                    // - #2 for AS4 message parsing
                     var bufferedMessage = inputMessage.CreateBufferedCopy(Int32.MaxValue);
 
                     inputs[0] = bufferedMessage.CreateMessage();
