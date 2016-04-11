@@ -79,8 +79,44 @@ The example code excludes retrieving the OrganisationId from the As4 Pull reques
 
 **Warning**: Once you read a message, the status is set to Read and cannot be read afterwards. The only solution for this is copying the message to a new message. 
 
+This method investigates the stream of the receive message, and searches for a organisationId, if a Id is found in the message, the Cache is checked. If the cache has a positive value, a new Output Message is created. 
 
+     private Message GetOutputMessageForInputMessageStream(Stream messageStream)
+    {
+    Message outputMessage = null;
+    
+    var organisationId = GetOrganisationId(messageStream);
+    
+    var cachedValue = _cacheClient.Read<bool>(new NoMessagesAvailableCacheKey(organisationId));
+    
+    if (cachedValue.IsPresent && cachedValue.Value)
+    {
+    // Create As4 Warning Message (EmptyMessagePartitionChannel) - for demo purposes this is removed.
+    var as4MessageStream = new MemoryStream();
+    }
+    
+    return outputMessage;
+    }
  
+If no Output message is created, the current Operation is triggered to continue to the implementation.
+
+            if (outputMessage == null)
+            {
+                var capturedOperationContext = OperationContext.Current;
+                return Task<object>.Factory.StartNew(() =>
+                {
+                    OperationContext.Current = capturedOperationContext;
+                    var begin = _innerInvoker.InvokeBegin(instance, inputs, null, state);
+                    object[] o;
+
+                    return _innerInvoker.InvokeEnd(instance, out o, begin);
+                });
+            }
+
+If there is a output message created, this message is returned and the service implementation is skipped.  
+
+     return Task.FromResult((object)outputMessage);
+
 Steps to be taken to host this behavior in BizTalk: 
 
 - GAC the signed dll. 
