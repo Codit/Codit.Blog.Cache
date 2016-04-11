@@ -43,7 +43,9 @@ An example of a cachekey
 
 
 This is how the values are stored in Redis:
-![](\images\RedisDesktopManager.png)
+
+![alt tag](https://github.com/msjonathan/Codit.Blog.Cache/blob/master/Images/RedisDesktopManager.PNG)
+
 
 
 ### Client ###
@@ -72,6 +74,8 @@ The return value implements the "MayBe principle", therefor you can check in adv
 ## Cache operation Invoker Usage ##
 
 todo
+
+
 
 # Links #
 todo
