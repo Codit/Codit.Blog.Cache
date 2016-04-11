@@ -71,7 +71,15 @@ The return value implements the "MayBe principle", therefor you can check in adv
 
 ## Cache operation Invoker Usage ##
 
-todo
+The IOperationInvoker is the last step before calling the actual implementation of your service, here you have the power of skipping the implementation.  
+
+
+
+Stepst to be taken to host this behavior in BizTalk: 
+
+- GAC the signed dll. 
+- Add the WCF behavior to the machine.config 
+- Add the behvior to your WCF receive port. 
 
 
 
