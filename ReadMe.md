@@ -76,4 +76,7 @@ todo
 
 
 # Links #
-todo
+
+- [https://github.com/uglide/RedisDesktopManager](https://github.com/uglide/RedisDesktopManager)
+- [https://github.com/StackExchange/StackExchange.Redis](https://github.com/StackExchange/StackExchange.Redis)
+- [https://github.com/JamesNK/Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
