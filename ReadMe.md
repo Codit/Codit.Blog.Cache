@@ -1,16 +1,15 @@
-Work in progress
 # ReadMe #
 
 This example code is part of a blog post on the codit blog about improving BizTalk performance by bypassing the BizTalk MessageBox with the help of Redis cache and a WCF IOperationInvoker.
 
 
-## RedisCacheClient Usage ##
+## RedisCacheClient ##
 
 The RedisCacheClient has the following NuGet Dependencies:
 
-- StackExchange.Redis.StrongName
+- *StackExchange.Redis.StrongName*
 
-- Newtonsoft.Json
+- *Newtonsoft.Json*
 
 To use the RedisCacheClient you'll have to update the connectionString fields (these are here only for demo-purposes), we recommend to abstract these away from the client's implementation.  
 
@@ -69,13 +68,17 @@ The return value implements the "MayBe principle", therefor you can check in adv
 
 
 
-## Cache operation Invoker Usage ##
+## Cache operation Invoker ##
 
-The IOperationInvoker is the last step before calling the actual implementation of your service, here you have the power of skipping the implementation.  
+The IOperationInvoker is the last step before calling the actual implementation of your service, here you have the power of skipping the implementation and returning a custom message.  
 
+This method can be implemented 
 
+     public Task<object> InvokeOperationAsync(object instance, object[] inputs, object state)
 
-Stepst to be taken to host this behavior in BizTalk: 
+The example code excludes retrieving the operationId and creation of the return message. If you want to know more about As4, the Codit blog has a serie [As4 For Dummies](http://www.codit.eu/blog/2016/02/01/as4-for-dummies-part-i-introduction/)
+ 
+Steps to be taken to host this behavior in BizTalk: 
 
 - GAC the signed dll. 
 - Add the WCF behavior to the machine.config 
