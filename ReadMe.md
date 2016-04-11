@@ -18,25 +18,6 @@ To use the RedisCacheClient you'll have to update the connectionString fields (t
 
 More information about configuring Redis for master/slave configuration & replication can be found [here](http://redis.io/topics/replication "Official Redis documentation"). 
 
-To write a value, create an instance of the RedisCacheClient, and as parameters pass a typed cache key, a value and a optional time-to-live. 
-
-
-    var client = new RedisCacheClient();
-    var success = client.Write(new YourCacheKey("Codit"), true, TimeSpan.FromMinutes(15));
-
-To read a value with the client, you only need to have a cacheKey
-
-    var client = new RedisCacheClient();
-    var cachedValue = _cacheClient.Read<bool>(new YourCacheKey("Codit"));
-
-The return value implements the "MayBe principle", therefor you can check in advance if there was an acutal value found. 
-
-    if (cachedValue.IsPresent)
-    {
-       // do something with cachedValue.Value
-    }
-
-
 ### CacheKeys ###
 Redis a a key-value store, to ease programming against it and to avoid typos. We introduced typed cache keys this allows us to re-use cache keys without having to worry about keeping strings up-to-date. 
 
@@ -63,6 +44,29 @@ An example of a cachekey
 
 This is how the values are stored in Redis:
 ![](\images\RedisDesktopManager.png)
+
+
+### Client ###
+
+To write a value, create an instance of the RedisCacheClient, and as parameters pass a typed cache key, a value and a optional time-to-live. 
+
+
+    var client = new RedisCacheClient();
+    var success = client.Write(new YourCacheKey("Codit"), true, TimeSpan.FromMinutes(15));
+
+To read a value with the client, you only need to have a cacheKey
+
+    var client = new RedisCacheClient();
+    var cachedValue = _cacheClient.Read<bool>(new YourCacheKey("Codit"));
+
+The return value implements the "MayBe principle", therefor you can check in advance if there was an acutal value found. This reads easier than having null check's. 
+
+    if (cachedValue.IsPresent)
+    {
+       // do something with cachedValue.Value
+    }
+
+
 
 
 ## Cache operation Invoker Usage ##
