@@ -67,16 +67,19 @@ The return value implements the "MayBe principle", therefor you can check in adv
 
 
 
-
 ## Cache operation Invoker ##
 
 The IOperationInvoker is the last step before calling the actual implementation of your service, here you have the power of skipping the implementation and returning a custom message.  
 
-This method can be implemented 
+You can adapt the following method to have your custom decision on continuing the service call or not. 
 
      public Task<object> InvokeOperationAsync(object instance, object[] inputs, object state)
 
-The example code excludes retrieving the operationId and creation of the return message. If you want to know more about As4, the Codit blog has a serie [As4 For Dummies](http://www.codit.eu/blog/2016/02/01/as4-for-dummies-part-i-introduction/)
+The example code excludes retrieving the OrganisationId from the As4 Pull request, and creation of the return message. If you want to know more about As4, the Codit blog has a serie [As4 For Dummies](http://www.codit.eu/blog/2016/02/01/as4-for-dummies-part-i-introduction/)
+
+**Warning**: Once you read a message, the status is set to Read and cannot be read afterwards. The only solution for this is copying the message to a new message. 
+
+
  
 Steps to be taken to host this behavior in BizTalk: 
 
