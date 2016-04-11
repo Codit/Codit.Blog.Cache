@@ -44,9 +44,7 @@ An example of a cachekey
 
 This is how the values are stored in Redis:
 
-![alt tag](https://github.com/msjonathan/Codit.Blog.Cache/blob/master/Images/RedisDesktopManager.PNG)
-
-
+![](https://github.com/msjonathan/Codit.Blog.Cache/blob/master/Images/RedisDesktopManager.PNG?raw=true)
 
 ### Client ###
 
