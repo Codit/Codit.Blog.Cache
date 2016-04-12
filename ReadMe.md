@@ -11,14 +11,14 @@ The RedisCacheClient has the following NuGet Dependencies:
 
 - *Newtonsoft.Json*
 
-To use the RedisCacheClient you'll have to update the connectionString fields (these are here only for demo-purposes), we recommend to abstract these away from the client's implementation.  
+To use the RedisCacheClient you'll have to update the ConnectionString fields (these are here only for demo-purposes), we recommend to abstract these away from the client's implementation.  
 
 *Write-Operations* will be done to the "master", *Read-Operations* will be done to the "slave". We trust Redis to do the replication of this data on multi-instance environments. 
 
 More information about configuring Redis for master/slave configuration & replication can be found [here](http://redis.io/topics/replication "Official Redis documentation"). 
 
 ### CacheKeys ###
-Redis a a key-value store, to ease programming against it and to avoid typos. We introduced typed cache keys this allows us to re-use cache keys without having to worry about keeping strings up-to-date. 
+Redis is a key-value store, to ease programming against it and to avoid typos. We introduced typed cache keys this allows us to re-use cache keys without having to worry about keeping strings up-to-date. 
 
 An example of a cachekey
 
@@ -47,7 +47,7 @@ This is how the values are stored in Redis:
 
 ### Client ###
 
-To write a value, create an instance of the RedisCacheClient, and as parameters pass a typed cache key, a value and a optional time-to-live. 
+To write a value, create an instance of the RedisCacheClient, and as parameters pass a typed cache key, a value and an optional time-to-live. 
 
 
     var client = new RedisCacheClient();
@@ -75,7 +75,7 @@ You can adapt the following method to have your custom decision on continuing th
 
      public Task<object> InvokeOperationAsync(object instance, object[] inputs, object state)
 
-The example code excludes retrieving the OrganisationId from the As4 Pull request, and creation of the return message. If you want to know more about As4, the Codit blog has a serie [As4 For Dummies](http://www.codit.eu/blog/2016/02/01/as4-for-dummies-part-i-introduction/)
+The example code excludes retrieving the OrganisationId from the As4 Pull request, and creation of the return message. If you want to know more about As4, the Codit blog has a series [As4 For Dummies](http://www.codit.eu/blog/2016/02/01/as4-for-dummies-part-i-introduction/)
 
 **Warning**: Once you read a message, the status is set to Read and cannot be read afterwards. The only solution for this is copying the message to a new message. 
 
@@ -121,7 +121,7 @@ Steps to be taken to host this behavior in BizTalk:
 
 - GAC the signed dll. 
 - Add the WCF behavior to the machine.config 
-- Add the behvior to your WCF receive port. 
+- Add the behavior to your WCF receive port. 
 
 
 
