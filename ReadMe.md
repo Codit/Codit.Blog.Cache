@@ -1,6 +1,6 @@
 # ReadMe #
 
-This example code is part of a blog post on the codit blog about improving BizTalk performance by bypassing the BizTalk MessageBox with the help of Redis cache and a WCF IOperationInvoker.
+This example code is part of a blog post on the codit blog about improving BizTalk performance by bypassing the BizTalk MessageBox with the help of Redis cache and a WCF IOperationInvoker.You can find the blogpost [here](http://www.codit.eu/blog/2016/04/boost-your-biztalk-performance-with-redis-cache/). 
 
 
 ## RedisCacheClient ##
