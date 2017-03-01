@@ -1,6 +1,6 @@
-# ReadMe #
+# Improving performance with Redis Cache #
 
-This example code is part of a blog post on the codit blog about improving BizTalk performance by bypassing the BizTalk MessageBox with the help of Redis cache and a WCF IOperationInvoker.You can find the blogpost [here](http://www.codit.eu/blog/2016/04/boost-your-biztalk-performance-with-redis-cache/). 
+This example code is part of a blog post on the Codit blog about improving BizTalk performance by bypassing the BizTalk MessageBox with the help of Redis cache and a WCF IOperationInvoker.You can find the blogpost [here](http://www.codit.eu/blog/2016/04/boost-your-biztalk-performance-with-redis-cache/). 
 
 
 ## RedisCacheClient ##
@@ -29,7 +29,7 @@ An example of a cachekey
         {
             _name = string.Format("TestCacheKey:{0}", parameter);
         }
-
+	
         private readonly string _name; 
         public string Name
         {
@@ -81,37 +81,37 @@ The example code excludes retrieving the OrganisationId from the As4 Pull reques
 
 This method investigates the stream of the receive message, and searches for a organisationId, if a Id is found in the message, the Cache is checked. If the cache has a positive value, a new Output Message is created. 
 
-     private Message GetOutputMessageForInputMessageStream(Stream messageStream)
+    private Message GetOutputMessageForInputMessageStream(Stream messageStream)
     {
-    Message outputMessage = null;
-    
-    var organisationId = GetOrganisationId(messageStream);
-    
-    var cachedValue = _cacheClient.Read<bool>(new NoMessagesAvailableCacheKey(organisationId));
-    
-    if (cachedValue.IsPresent && cachedValue.Value)
-    {
-    // Create As4 Warning Message (EmptyMessagePartitionChannel) - for demo purposes this is removed.
-    var as4MessageStream = new MemoryStream();
-    }
-    
-    return outputMessage;
+	    Message outputMessage = null;
+	    
+	    var organisationId = GetOrganisationId(messageStream);
+	    
+	    var cachedValue = _cacheClient.Read<bool>(new NoMessagesAvailableCacheKey(organisationId));
+	    
+	    if (cachedValue.IsPresent && cachedValue.Value)
+	    {
+		    // Create As4 Warning Message (EmptyMessagePartitionChannel) - for demo purposes this is removed.
+		    var as4MessageStream = new MemoryStream();
+	    }
+	    
+	    return outputMessage;
     }
  
 If no Output message is created, the current Operation is triggered to continue to the implementation.
 
-            if (outputMessage == null)
-            {
-                var capturedOperationContext = OperationContext.Current;
-                return Task<object>.Factory.StartNew(() =>
-                {
-                    OperationContext.Current = capturedOperationContext;
-                    var begin = _innerInvoker.InvokeBegin(instance, inputs, null, state);
-                    object[] o;
+    if (outputMessage == null)
+    {
+        var capturedOperationContext = OperationContext.Current;
+        return Task<object>.Factory.StartNew(() =>
+        {
+            OperationContext.Current = capturedOperationContext;
+            var begin = _innerInvoker.InvokeBegin(instance, inputs, null, state);
+            object[] o;
 
-                    return _innerInvoker.InvokeEnd(instance, out o, begin);
-                });
-            }
+            return _innerInvoker.InvokeEnd(instance, out o, begin);
+        });
+    }
 
 If there is a output message created, this message is returned and the service implementation is skipped.  
 
